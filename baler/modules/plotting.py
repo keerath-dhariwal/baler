@@ -383,13 +383,14 @@ def plot_2D(project_path, config):
     data = np.load(config.input_path)["data"]
     data_decompressed = np.load(project_path + "/decompressed_output/decompressed.npz")[
         "data"
-    ]
-
+    ][:,:,:]
+    #print(data_decompressed.shape)
+    #print(data.shape)
     if config.convert_to_blocks:
         data_decompressed = data_decompressed.reshape(
             data.shape[0], data.shape[1], data.shape[2]
         )
-
+    #print(data_decompressed.shape)
     if data.shape[0] > 1:
         num_tiles = data.shape[0]
     else:

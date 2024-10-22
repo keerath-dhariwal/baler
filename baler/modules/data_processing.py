@@ -99,8 +99,9 @@ def load_model(model_object, model_path: str, n_features: int, z_dim: int):
     Returns: nn.Module: Returns a model object with the attributes of the model class, with the selected state
     dictionary loaded into it.
     """
+
     device = helper.get_device()
-    model = model_object(n_features, z_dim)
+    model = model_object(in_dim=n_features, latent_size=z_dim)
     model.to(device)
 
     # Loading the state_dict into the model

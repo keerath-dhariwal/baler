@@ -156,7 +156,7 @@ def perform_training(output_path, config, verbose: bool):
         print(f"Device used for training: {device}")
 
     model_object = helper.model_init(config.model_name)
-    model = model_object(n_features=n_features, z_dim=config.latent_space_size)
+    model = model_object(in_dim=n_features, latent_size=config.latent_space_size)
     model.to(device)
 
     if config.model_name == "Conv_AE_3D" and hasattr(

@@ -646,7 +646,7 @@ def decompress(
     data = loaded["data"]
     names = loaded["names"]
     normalization_features = loaded["normalization_features"]
-
+    print(data.shape)
     if config.model_type == "convolutional":
         final_layer_details = np.load(
             os.path.join(output_path, "training", "final_layer.npy"), allow_pickle=True
@@ -701,8 +701,9 @@ def decompress(
     with torch.no_grad():
         for idx, data_batch in enumerate(tqdm(data_dl)):
             data_batch = data_batch.to(device)
-
+       #     print(data_batch.size())
             out = model.decode(data_batch).to(device)
+      #      print(out.size())
             # Converting back to numpyarray
             out = detacher(out)
             if config.save_error_bounded_deltas:
@@ -721,7 +722,7 @@ def decompress(
                 decompressed = out
             else:
                 decompressed = np.concatenate((decompressed, out))
-
+     #       print(decompressed.shape)
     if config.save_error_bounded_deltas:
         print("Total Deltas Added - ", deltas_added)
 
@@ -729,7 +730,7 @@ def decompress(
         decompressed = decompressed.reshape(
             (len(decompressed), original_shape[1], original_shape[2])
         )
-
+    #print(decompressed.shape)
     return decompressed, names, normalization_features
 
 

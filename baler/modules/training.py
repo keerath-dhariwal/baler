@@ -63,13 +63,14 @@ def fit(
 
     for idx, inputs in enumerate(tqdm(train_dl)):
         inputs = inputs.to(device)
-
+        #print(inputs.size())
+        #print(model)
         # Set the gradients to zero
         optimizer.zero_grad()
 
         # Compute the predicted outputs from the input data
         reconstructions = model(inputs)
-
+        #print(reconstructions.size())
         if (
             hasattr(config, "custom_loss_function")
             and config.custom_loss_function == "loss_function_swae"
