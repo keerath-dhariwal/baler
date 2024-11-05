@@ -731,6 +731,8 @@ def decompress(
             (len(decompressed), original_shape[1], original_shape[2])
         )
     #print(decompressed.shape)
+    
+    #decompressed = np.clip(decompressed, a_min=0, a_max=255).astype(np.uint8)
     return decompressed, names, normalization_features
 
 

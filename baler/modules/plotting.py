@@ -109,7 +109,7 @@ def plot_1D(output_path: str, config):
     """
 
     before_path = config.input_path
-    after_path = os.path.join(output_path, "decompressed_output", "decompressed.npz")
+    after_path = os.path.join(output_path, "decompressed_output", "decompressed2.npz")
 
     before = np.transpose(np.load(before_path)["data"])
     after = np.transpose(np.load(after_path)["data"])
@@ -257,7 +257,7 @@ def plot_2D_old(project_path, config):
     """
 
     data = np.load(config.input_path)["data"]
-    data_decompressed = np.load(project_path + "/decompressed_output/decompressed.npz")[
+    data_decompressed = np.load(project_path + "/decompressed_output/decompressed2.npz")[
         "data"
     ]
 
@@ -381,9 +381,9 @@ def plot_2D(project_path, config):
     """
 
     data = np.load(config.input_path)["data"]
-    data_decompressed = np.load(project_path + "/decompressed_output/decompressed.npz")[
+    data_decompressed = np.load(project_path + "/decompressed_output/decompressed2.npz")[
         "data"
-    ][:,:,:]
+    ][:,:,:].astype(np.float32)
     #print(data_decompressed.shape)
     #print(data.shape)
     if config.convert_to_blocks:
